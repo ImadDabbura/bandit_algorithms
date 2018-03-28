@@ -20,7 +20,7 @@ class Softmax:
     Attributes
     ----------
     select_arm : 
-        select the best arm 
+        select the arm using categorical distribution.
     """
     def __init__(self, temperature, counts=None, values=None):
         self.temperature = temperature

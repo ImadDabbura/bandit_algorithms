@@ -1,5 +1,5 @@
 """
-Implementing epsilon-Greedy Algorithm in both standard and annealing forms.
+Implementing epsilon-Greedy algorithm in both standard and annealing forms.
 """
 
 import numpy as np
