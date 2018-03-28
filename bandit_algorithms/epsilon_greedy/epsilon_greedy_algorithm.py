@@ -19,7 +19,7 @@ class EpsilonGreedy:
 
     Attributes
     ----------
-    select_arm : 
+    select_arm : int
         select the best arm with probability (1 - epsilon) or randomly select
         any arm available with probability (1 / N) for each arm.
     """

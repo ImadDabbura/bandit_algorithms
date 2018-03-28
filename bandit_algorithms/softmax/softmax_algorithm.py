@@ -19,25 +19,25 @@ class Softmax:
 
     Attributes
     ----------
-    select_arm : 
+    select_arm : int
         select the arm using categorical distribution.
     """
     def __init__(self, temperature, counts=None, values=None):
         self.temperature = temperature
         self.counts = counts
         self.values = values
-        
+
     def initialize(self, n_arms):
         """Initialize counts and values array with zeros."""
         self.counts = np.zeros(n_arms, dtype=int)
         self.values = np.zeros(n_arms, dtype=float)
-        
+
     def select_arm(self):
         # Compute softmax probs
         z = self.values / self.temperature
         probs = np.exp(z) / np.sum(np.exp(z))
         return Softmax.categorical_draw(probs)
-        
+
     @staticmethod
     def categorical_draw(probs):
         """Use categorical distribution to return the index of the next arm.
@@ -55,13 +55,13 @@ class Softmax:
         """
         preds = np.random.multinomial(1, probs, 1)
         return np.argmax(preds)
-    
+
     def update(self, chosen_arm, reward):
         """Update counts and estimated value of rewards for the chosen arm."""
         # Increment counts
         self.counts[chosen_arm] += 1
         n = self.counts[chosen_arm]
-        
+
         # Update the expected values of chosen arm
         value = self.values[chosen_arm]
         new_value = value * ((n - 1) / n) + reward / n
@@ -78,13 +78,13 @@ class AnnealingSoftmax(Softmax):
     def __init__(self, counts=None, values=None):
         self.counts = counts
         self.values = values
-        
+
     def select_arm(self):
         # Increment t each time select_arm is called
         t = np.sum(self.counts) + 1
         # Decay temperature with time
         temperature = 1 / np.log(t + 0.0000001)
-        
+
         # Compute softmax probs
         z = self.values / temperature
         probs = np.exp(z) / np.sum(np.exp(z))
