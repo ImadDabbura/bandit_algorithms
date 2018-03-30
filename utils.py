@@ -76,14 +76,14 @@ def plot_algorithm(
                 "Probability of Selecting Best Arm", fontsize=14)
             axes[0].set_title(
                 f"Accuray of {alg_name} alg.", y=1.05, fontsize=16)
-            axes[0].legend(loc="lower right")
+            axes[0].legend()
             axes[0].set_ylim([0, 1.05])
             axes[1].plot(average_rewards, label=f"{label} = {hyper_param}")
             axes[1].set_xlabel("Time", fontsize=14)
             axes[1].set_ylabel("Average Reward", fontsize=14)
             axes[1].set_title(
                 f"Avg. Rewards of {alg_name} alg.", y=1.05, fontsize=16)
-            axes[1].legend(loc="lower right")
+            axes[1].legend()
             axes[1].set_ylim([0, 1.0])
             axes[2].plot(cum_rewards, label=f"{label} = {hyper_param}")
             axes[2].set_xlabel("Time", fontsize=14)
